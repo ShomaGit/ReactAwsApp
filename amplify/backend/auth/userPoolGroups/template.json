@@ -1,0 +1,55 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "authreactCognitoShomaUserPoolId": {
+            "Type": "String",
+            "Default": "authreactCognitoShomaUserPoolId"
+        },
+        
+        "authreactCognitoShomaAppClientID": {
+            "Type": "String",
+            "Default": "authreactCognitoShomaAppClientID"
+        },
+        "authreactCognitoShomaAppClientIDWeb": {
+            "Type": "String",
+            "Default": "authreactCognitoShomaAppClientIDWeb"
+        },
+        "AuthRoleArn": {
+            "Type": "String"
+        },
+        "UnauthRoleArn": {
+            "Type": "String"
+        },
+        "env": {
+            "Type": "String"
+        }
+    },
+    "Conditions": {
+        "ShouldNotCreateEnvResources": {
+            "Fn::Equals": [
+                {
+                    "Ref": "env"
+                },
+                "NONE"
+            ]
+        }
+    },
+    "Resources": {
+    
+        "poolGroupGroup": {
+          "Type" : "AWS::Cognito::UserPoolGroup",
+          "Properties" : {
+              "GroupName" : "poolGroup",
+              "Precedence" : 1,
+              
+              "UserPoolId" : {
+                "Ref": "authreactCognitoShomaUserPoolId"
+              }
+            }
+        },
+        
+    
+    
+    },
+    
+}
